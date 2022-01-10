@@ -59,6 +59,7 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
 
         script = condor_script(portnum, np, params)
         cmd = `condor_submit $script`
+        println(script)
         if !success(cmd)
             println("batch queue not available (could not run condor_submit)")
             return
@@ -99,3 +100,5 @@ function manage(manager::HTCManager, id::Integer, config::WorkerConfig, op::Symb
 end
 
 addprocs_htc(np::Integer) = addprocs(HTCManager(np))
+addprocs_htc(np::Integer;kwargs...) = addprocs(HTCManager(np);kwargs...)
+
