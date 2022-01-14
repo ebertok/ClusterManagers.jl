@@ -69,8 +69,9 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
 
         for i=1:np
             conn = accept(server)
+            println(conn)
             config = WorkerConfig()
-
+            println(config)
             config.io = conn
 
             push!(instances_arr, config)
