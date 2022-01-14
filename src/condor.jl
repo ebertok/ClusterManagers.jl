@@ -79,7 +79,9 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
             notify(c)
             print("$i ")
         end
-        println(cons)
+        for i in 1:np
+            println(cons[i])
+        end
         println(".")
 
    catch e
