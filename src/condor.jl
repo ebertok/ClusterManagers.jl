@@ -34,7 +34,7 @@ function condor_script(portnum::Integer, np::Integer, params::Dict)
     subf = open("$tdir/$jobname.sub", "w")
     println(subf, "executable = /bin/bash")
     println(subf, "arguments = ./$jobname.sh")
-    println(subf, "universe = parallel")
+    println(subf, "universe = vanilla")
     println(subf, "should_transfer_files = yes")
     println(subf, "transfer_input_files = $(join(input_files, ','))")
     println(subf, "Notification = Error")
@@ -44,6 +44,8 @@ function condor_script(portnum::Integer, np::Integer, params::Dict)
     for i = 1:np
         println(subf, "output = $tdir/$jobname-$i.o")
         println(subf, "error= $tdir/$jobname-$i.e")
+        println(subf, "error= $tdir/$jobname-$i.log")
+
         println(subf, "queue")
     end
     close(subf)
