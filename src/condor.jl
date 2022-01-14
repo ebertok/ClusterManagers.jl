@@ -67,17 +67,19 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
         end
         print("Waiting for $np workers: ")
 
+        cons = []
         for i=1:np
             conn = accept(server)
-            println(conn)
             config = WorkerConfig()
-            println(config)
             config.io = conn
+
+            push!(cons,conn)
 
             push!(instances_arr, config)
             notify(c)
             print("$i ")
         end
+        println(cons)
         println(".")
 
    catch e
