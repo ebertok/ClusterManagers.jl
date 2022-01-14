@@ -44,7 +44,7 @@ function condor_script(portnum::Integer, np::Integer, params::Dict)
     for i = 1:np
         println(subf, "output = $tdir/$jobname-$i.o")
         println(subf, "error= $tdir/$jobname-$i.e")
-        println(subf, "error= $tdir/$jobname-$i.log")
+        println(subf, "log= $tdir/$jobname-$i.log")
 
         println(subf, "queue")
     end
