@@ -80,8 +80,9 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
             print("$i ")
         end
         for i in 1:np
-            println(cons[i])
+            println(isopen(cons[i]))
         end
+        println(count(isopen.(cons)))
         println(".")
 
    catch e
