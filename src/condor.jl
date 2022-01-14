@@ -56,7 +56,7 @@ end
 function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Condition)
     try
         portnum = rand(8000:9000)
-        _, server = listenany(Sockets.getaddrinfo("0.0.0.0"), portnum)
+        portnum, server = listenany(Sockets.getaddrinfo("0.0.0.0"), portnum)
         np = manager.np
 
         script = condor_script(portnum, np, params)
