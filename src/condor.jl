@@ -65,8 +65,9 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
             println("batch queue not available (could not run condor_submit)")
             return
         end
+        println("sleep to give workers some time...")
+        sleep(10)
         print("Waiting for $np workers: ")
-
         cons = []
         for i=1:np
             conn = accept(server)
@@ -79,10 +80,7 @@ function launch(manager::HTCManager, params::Dict, instances_arr::Array, c::Cond
             notify(c)
             print("$i ")
         end
-        for i in 1:np
-            println(isopen(cons[i]))
-        end
-        println(count(isopen.(cons)))
+        println("$(count(isopen.(cons))) sockets are open. The port is $portnum")
         println(".")
 
    catch e
